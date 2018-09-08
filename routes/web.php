@@ -24,4 +24,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::view('/admin/home', 'admin.home')->name('admin.home');
 
+    //Products
+    Route::get('/admin/products', 'Admin\ProductController@getProducts')->name('get.products');
+    Route::post('/admin/products', 'Admin\ProductController@postProducts')->name('post.product');
+
+
 });

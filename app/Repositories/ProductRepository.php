@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repository;
+namespace App\Repositories;
 
 use App\Contracts\ProductRepositoryInterface;
 use App\Models\Product;
@@ -22,4 +22,31 @@ class ProductRepository implements ProductRepositoryInterface
     {
         $this->product = $products;
     }
+
+    /**
+     * Gets all imported products
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function getImportedProducts()
+    {
+        return $this->product->all();
+    }
+
+    /**
+     * Insert multiple products at once
+     *
+     * @param array $product
+     * @return bool
+     */
+    public function insertBulkProducts(array $product)
+    {
+        try{
+            return $this->product->insert($product);
+        }catch (\Exception $e)
+        {
+            return false;
+        }
+    }
+
 }

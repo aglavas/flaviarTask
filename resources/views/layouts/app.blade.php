@@ -38,6 +38,9 @@
                         <li {{{ (Request::is('admin/home') ? 'class=active' : '') }}}>
                             <a class="nav-link" href="{{ route('admin.home') }}">Home</a>
                         </li>
+                        <li {{{ (Request::is('admin/products') ? 'class=active' : '') }}}>
+                            <a class="nav-link" href="{{ route('get.products') }}">Products</a>
+                        </li>
                     </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">

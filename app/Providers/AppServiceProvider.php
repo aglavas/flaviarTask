@@ -3,11 +3,13 @@
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use App\Contracts\ProductRepositoryInterface;
 use App\Contracts\VendorRepositoryInterface;
-use App\Repository\ProductRepository;
-use App\Repository\VendorRepository;
+use App\Repositories\ProductRepository;
+use App\Repositories\VendorRepository;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+        Validator::extend('excel', 'App\Validators\CustomValidator@extensionExcel');
+        Validator::replacer('excel', 'App\Validators\CustomValidator@extensionExcelReplacer');
     }
 
     /**
