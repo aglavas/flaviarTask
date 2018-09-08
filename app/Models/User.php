@@ -27,4 +27,28 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Entity table
+     *
+     * @var string
+     */
+    protected $table = 'users';
+
+    /**
+     * Disable timestamps
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
+     * Password field mutator
+     *
+     * @param $value
+     */
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
 }
