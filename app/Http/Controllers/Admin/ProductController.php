@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Contracts\ProductRepositoryInterface;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PatchProductRequest;
 use App\Http\Requests\PostProductRequest;
 use App\Models\Product;
 use App\Services\XlsParser;
@@ -59,4 +60,29 @@ class ProductController extends Controller
 
         return redirect()->back()->with('error', __('Error while importing data, possible duplicates detected'));
     }
+
+
+    /**
+     * Edit product information
+     *
+     * @param Product $product
+     * @param PatchProductRequest $request
+     * @return $this
+     */
+    public function patchProduct(Product $product,  PatchProductRequest $request)
+    {
+        $result = $this->productRepository->updateProduct($request->only(['name', 'volume', 'abv']), $product);
+
+        if($result)
+        {
+            return response()->json([
+                'message' => 'Product is updated successfully.'
+            ])->setStatusCode(200);
+        }
+
+        return response()->json([
+            'message' => 'Error while updating product.'
+        ])->setStatusCode(500);
+    }
+
 }

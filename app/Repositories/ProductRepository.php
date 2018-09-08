@@ -49,4 +49,15 @@ class ProductRepository implements ProductRepositoryInterface
         }
     }
 
+    /**
+     * Update product entity
+     *
+     * @param array $params
+     * @param Product $model
+     * @return bool
+     */
+    public function updateProduct(array $params, Product $model)
+    {
+        return $model->update($params);
+    }
 }

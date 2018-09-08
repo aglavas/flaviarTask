@@ -20,4 +20,13 @@ interface ProductRepositoryInterface
      * @return bool
      */
     public function insertBulkProducts(array $collection);
+
+    /**
+     * Update product entity
+     *
+     * @param array $params
+     * @param Product $product
+     * @return mixed
+     */
+    public function updateProduct(array $params, Product $product);
 }

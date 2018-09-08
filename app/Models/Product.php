@@ -23,6 +23,13 @@ class Product extends Model
     protected $table = 'products';
 
     /**
+     * Disable timestamps
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * Route model binding override
      *
      * @return string

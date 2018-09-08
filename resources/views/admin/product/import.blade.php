@@ -82,5 +82,89 @@
             </tbody>
         </table>
     </div>
+    <div id="modal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <meta name="csrf-token" content="{{ csrf_token() }}">
+                <div class="modal-body mx-3">
+                    <div class="md-form mb-5">
+                        <i class="fa fa-envelope prefix grey-text"></i>
+                        <input type="text" id="modal-name" class="form-control validate">
+                        <label data-error="wrong" data-success="right" for="modal-name">Name</label>
+                    </div>
+                    <div class="md-form mb-4">
+                        <i class="fa fa-lock prefix grey-text"></i>
+                        <input type="text" id="modal-volume" class="form-control validate">
+                        <label data-error="wrong" data-success="right" for="modal-volume">Volume</label>
+                    </div>
+                    <div class="md-form mb-4">
+                        <i class="fa fa-lock prefix grey-text"></i>
+                        <input type="text" id="modal-abv" class="form-control validate">
+                        <label data-error="wrong" data-success="right" for="modal-abv">Abv</label>
+                    </div>
+                </div>
+                <div id="info">
+                </div>
+                <div id="validation-errors">
+                </div>
+                <div class="modal-footer">
+                    <button id="saveEdit" type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        $('document').ready(function() {
+            $('.table tbody').on('click', 'tr', function() {
+                var tableData = $(this).children("td").map(function() {
+                    return $(this).text();
+                }).get();
+                $('#modal-name').val(tableData[1]);
+                $('#modal-volume').val(tableData[2]);
+                $('#modal-abv').val(tableData[3]);
+                $('#modal').modal('show');
+
+
+                $( "#saveEdit" ).bind( "click", function() {
+                    $.ajax({
+                        url: '/admin/products/' + tableData[0] ,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: {
+                            'name': $('#modal-name').val(),
+                            'volume': $('#modal-volume').val(),
+                            'abv': $('#modal-abv').val()
+                        },
+                        success: function(data) {
+                            console.log(data.message);
+                            var title = '<h1>' + 'Success' + '</h1>';
+                            var message = '<p>' + data.message + '</p>';
+                            $('#info')
+                                .append(title)
+                                .append(message);
+
+                            setTimeout(location.reload.bind(location), 600);
+                        },
+                        error: function(data) {
+                            $('#validation-errors').html('');
+                            $.each(data.responseJSON.errors, function(key,value) {
+                                $('#validation-errors').append('<div class="alert alert-danger">'+value+'</div');
+                            });
+                        },
+                        type: 'PATCH'
+                    });
+                });
+            });
+        });
+    </script>
 @endif
 @endsection
