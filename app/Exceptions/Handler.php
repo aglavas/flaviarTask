@@ -48,13 +48,15 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        $segment = $request->segments();
+        if ($exception instanceof ModelNotFoundException) {
+            $segment = $request->segments();
 
-        if ($segment[0] === 'api' && $exception instanceof ModelNotFoundException) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Product not found.',
-            ])->setStatusCode(404);
+            if ($segment[0] === 'api') {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Product not found.',
+                ])->setStatusCode(404);
+            }
         }
 
         return parent::render($request, $exception);
