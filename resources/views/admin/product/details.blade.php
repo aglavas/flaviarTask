@@ -46,8 +46,6 @@
                     <button type="submit" class="btn btn-primary">
                         {{ __('Submit') }}
                     </button>
-                </div>
-                <div class="col-md-8 offset-md-4">
                     <a href="{{route('get.products')}}" class="btn btn-primary" role="button">Back</a>
                 </div>
             </div>

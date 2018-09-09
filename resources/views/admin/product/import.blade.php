@@ -55,6 +55,7 @@
         </div>
     </div>
 </div>
+<br>
 
 @if (count($products))
     <div class="container">
@@ -80,7 +81,6 @@
                     <td>
                         <a href="#" class="editButton btn btn-primary" role="button">Edit</a>
                         <a href="{{ route('get.product.vendors', $product)}}" class="btn btn-primary" role="button">Assign to vendor</a>
-                        {{--<a href="/admin/product/vendors/{{$product->product_id}}" class="btn btn-primary" role="button">Assign to vendor</a>--}}
                     </td>
                 </tr>
             @endforeach
@@ -115,8 +115,6 @@
                     </div>
                 </div>
                 <div id="info">
-                </div>
-                <div id="validation-errors">
                 </div>
                 <div class="modal-footer">
                     <button id="saveEdit" type="button" class="btn btn-primary">Save changes</button>
@@ -154,19 +152,17 @@
                             'abv': $('#modal-abv').val()
                         },
                         success: function(data) {
-                            console.log(data.message);
-                            var title = '<h1>' + 'Success' + '</h1>';
-                            var message = '<p>' + data.message + '</p>';
+                            var div = '<div class="alert alert-success alert-dismissable">'
+                                + '<h1>' + 'Success' + '</h1>' + '<p>' + data.message + '</p>' + '</div>';
                             $('#info')
-                                .append(title)
-                                .append(message);
+                                .append(div);
 
                             setTimeout(location.reload.bind(location), 600);
                         },
                         error: function(data) {
-                            $('#validation-errors').html('');
+                            $('#info').html('');
                             $.each(data.responseJSON.errors, function(key,value) {
-                                $('#validation-errors').append('<div class="alert alert-danger">'+value+'</div');
+                                $('#info').append('<div class="alert alert-danger">'+value+'</div>');
                             });
                         },
                         type: 'PATCH'

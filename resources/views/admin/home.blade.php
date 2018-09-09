@@ -14,10 +14,13 @@
                     @endif
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            Click on import to import products
+                            Click on Products to import and view products
                         </li>
                         <li class="nav-item">
-                            Click on vendors to assign products to vendors
+                            Click on Vendors to view and edit vendors
+                        </li>
+                        <li class="nav-item">
+                            Click on Details to view and product additional details
                         </li>
                     </ul>
                 </div>
