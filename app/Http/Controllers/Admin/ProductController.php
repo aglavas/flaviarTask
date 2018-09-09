@@ -99,4 +99,35 @@ class ProductController extends Controller
         ])->setStatusCode(500);
     }
 
+    /**
+     * Return product details view with related data
+     *
+     * @param Product $product
+     * @return $this
+     */
+    public function getProductVendors(Product $product)
+    {
+        $vendors = $this->vendorRepository->getAllVendors();
+
+        return view('admin.product.details')
+            ->with('product', $product)
+            ->with('vendors', $vendors);
+    }
+
+    /**
+     * @param Product $product
+     * @param PostProductVendorsRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postProductVendors(Product $product,  PostProductVendorsRequest $request)
+    {
+        $product->vendors()->attach($request->post('vendor_id'), [
+            'stock' => $request->post('stock'),
+            'price' => $request->post('price')
+        ]);
+
+        return redirect()->back()->with('success', __('Vendor and product details saved successfully'));
+    }
+
+
 }

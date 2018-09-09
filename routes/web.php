@@ -29,5 +29,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/admin/products', 'Admin\ProductController@postProducts')->name('post.product');
     Route::patch('/admin/products/{product}', 'Admin\ProductController@patchProduct')->name('patch.products');
 
+    Route::get('/admin/product/vendors/{product}', 'Admin\ProductController@getProductVendors')->name('get.product.vendors');
+    Route::post('/admin/product/vendors/{product}', 'Admin\ProductController@postProductVendors')->name('post.product.vendors');
+
+
 
 });

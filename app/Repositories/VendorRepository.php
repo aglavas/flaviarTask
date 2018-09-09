@@ -23,4 +23,13 @@ class VendorRepository implements VendorRepositoryInterface
         $this->vendor = $vendor;
     }
 
+    /**
+     * Get all vendors
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function getAllVendors()
+    {
+        return $this->vendor->all();
+    }
 }
