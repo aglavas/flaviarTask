@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Contracts\ProductRepositoryInterface;
+use App\Contracts\VendorRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PatchProductRequest;
 use App\Http\Requests\PostProductRequest;
+use App\Http\Requests\PostProductVendorsRequest;
 use App\Models\Product;
 use App\Services\XlsParser;
 use Illuminate\Http\Request;
@@ -20,12 +22,24 @@ class ProductController extends Controller
     private $productRepository;
 
     /**
+     * Vendor repository property
+     *
+     * @var VendorRepositoryInterface
+     */
+    private $vendorRepository;
+
+    /**
      * ProductController constructor.
      * @param ProductRepositoryInterface $productRepository
+     * @param VendorRepositoryInterface $vendorRepository
      */
-    public function __construct(ProductRepositoryInterface $productRepository)
+    public function __construct(
+        ProductRepositoryInterface $productRepository,
+        VendorRepositoryInterface $vendorRepository
+    )
     {
         $this->productRepository = $productRepository;
+        $this->vendorRepository = $vendorRepository;
     }
 
     /**

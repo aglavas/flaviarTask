@@ -67,16 +67,21 @@
                     <td scope="col">Name</td>
                     <td scope="col">Volume</td>
                     <td scope="col">Abv</td>
+                    <td scope="col">Actions</td>
                 </tr>
             </thead>
             <tbody>
             @foreach($products as $product)
-                <tr class='clickable-row' data-href='/admin/products/{{$product->product_id}}'>
+                <tr>
                     <th scope="row">{{ $product->id }}</th>
                     <td>{{ $product->product_id }}</td>
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->volume }}</td>
                     <td>{{ $product->abv }}</td>
+                    <td>
+                        <a href="#" class="editButton btn btn-primary" role="button">Edit</a>
+                        <a href="/admin/product/vendors/{{$product->product_id}}" class="btn btn-primary" role="button">Assign to vendor</a>
+                    </td>
                 </tr>
             @endforeach
             </tbody>
@@ -123,19 +128,23 @@
     <script>
 
         $('document').ready(function() {
-            $('.table tbody').on('click', 'tr', function() {
-                var tableData = $(this).children("td").map(function() {
+            $(".editButton").on("click", function(){
+                var rowArray = $(this).closest('tr').find('td').map(function() {
                     return $(this).text();
-                }).get();
-                $('#modal-name').val(tableData[1]);
-                $('#modal-volume').val(tableData[2]);
-                $('#modal-abv').val(tableData[3]);
+                });
+                openEditModal(rowArray);
+            });
+
+            function openEditModal(rowArray) {
+                $('#modal-name').val(rowArray[1]);
+                $('#modal-volume').val(rowArray[2]);
+                $('#modal-abv').val(rowArray[3]);
                 $('#modal').modal('show');
 
 
                 $( "#saveEdit" ).bind( "click", function() {
                     $.ajax({
-                        url: '/admin/products/' + tableData[0] ,
+                        url: '/admin/products/' + rowArray[0] ,
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
@@ -163,8 +172,8 @@
                         type: 'PATCH'
                     });
                 });
-            });
-        });
+            }
+        })
     </script>
 @endif
 @endsection
