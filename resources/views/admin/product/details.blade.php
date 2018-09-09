@@ -23,7 +23,7 @@
             <div class="form-group row">
                 <label for="price" class="col-sm-4 col-form-label text-md-right">{{ __('Price') }}</label>
                 <input type="text" name="price">
-                {{--<input type="text" name="product_id" value="{{$product->id}}" hidden>--}}
+                <input type="text" name="product_id" value="{{$product->id}}" hidden>
             </div>
             @if ($errors->any())
                 <div class="alert alert-danger alert-dismissable">

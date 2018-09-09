@@ -29,4 +29,18 @@ interface ProductRepositoryInterface
      * @return mixed
      */
     public function updateProduct(array $params, Product $product);
+
+    /**
+     * Get all products with vendor details
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function getAllProductDetails();
+
+    /**
+     * Get product min, max, avg price if possible to calculate (attached to at least two vendors)
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function getProductStatistics();
 }

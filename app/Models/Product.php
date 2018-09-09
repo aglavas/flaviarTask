@@ -46,7 +46,7 @@ class Product extends Model
      */
     public function vendors()
     {
-        return $this->belongsToMany(Vendor::class, 'product_vendor', 'product_id', 'vendor_id');
+        return $this->belongsToMany(Vendor::class, 'product_vendor', 'product_id', 'vendor_id')->withPivot(['stock','price']);
     }
 
 

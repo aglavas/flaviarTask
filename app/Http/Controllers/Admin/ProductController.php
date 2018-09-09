@@ -10,6 +10,7 @@ use App\Http\Requests\PostProductRequest;
 use App\Http\Requests\PostProductVendorsRequest;
 use App\Models\Product;
 use App\Services\XlsParser;
+use App\Transformers\ProductDetailsTransformer;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -129,5 +130,21 @@ class ProductController extends Controller
         return redirect()->back()->with('success', __('Vendor and product details saved successfully'));
     }
 
+    /**
+     * Get all products details with statistic informations
+     *
+     * @param ProductDetailsTransformer $transformer
+     * @return $this
+     */
+    public function getProductDetails(ProductDetailsTransformer $transformer)
+    {
+        $productDetails = $this->productRepository->getAllProductDetails();
 
+        $productStatistics = $this->productRepository->getProductStatistics();
+
+        $transformedCollection = $transformer->transform($productDetails, $productStatistics);
+
+        return view('admin.product.details.list')
+            ->with('productDetails', $transformedCollection);
+    }
 }
