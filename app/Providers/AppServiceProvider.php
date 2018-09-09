@@ -11,7 +11,6 @@ use App\Contracts\VendorRepositoryInterface;
 use App\Repositories\ProductRepository;
 use App\Repositories\VendorRepository;
 
-
 class AppServiceProvider extends ServiceProvider
 {
     /**

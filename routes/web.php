@@ -13,31 +13,44 @@
 
 Route::group(['middleware' => ['guest']], function () {
 
-    Route::view('/', 'auth.login')->name('login');
-    Route::post('/login', 'Auth\LoginController@login')->name('post.login');
+    Route::view('/', 'auth.login')
+        ->name('login');
+
+    Route::post('/login', 'Auth\LoginController@login')
+        ->name('post.login');
 
 });
 
 Route::group(['middleware' => ['auth']], function () {
 
-    Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+    Route::post('/logout', 'Auth\LoginController@logout')
+        ->name('logout');
 
-    Route::view('/admin/home', 'admin.home')->name('admin.home');
+    Route::view('/admin/home', 'admin.home')
+        ->name('admin.home');
 
     //Products
-    Route::get('/admin/products', 'Admin\ProductController@getProducts')->name('get.products');
-    Route::post('/admin/products', 'Admin\ProductController@postProducts')->name('post.product');
-    Route::patch('/admin/products/{product}', 'Admin\ProductController@patchProduct')->name('patch.products');
+    Route::get('/admin/products', 'Admin\ProductController@getProducts')
+        ->name('get.products');
 
-    Route::get('/admin/product/vendors/{product}', 'Admin\ProductController@getProductVendors')->name('get.product.vendors');
-    Route::post('/admin/product/vendors/{product}', 'Admin\ProductController@postProductVendors')->name('post.product.vendors');
+    Route::post('/admin/products', 'Admin\ProductController@postProducts')
+        ->name('post.product');
+
+    Route::patch('/admin/products/{product}', 'Admin\ProductController@patchProduct')
+        ->name('patch.products');
+
+    Route::get('/admin/product/vendors/{product}', 'Admin\ProductController@getProductVendors')
+        ->name('get.product.vendors');
+
+    Route::post('/admin/product/vendors/{product}', 'Admin\ProductController@postProductVendors')
+        ->name('post.product.vendors');
 
     Route::get('/admin/product/details', 'Admin\ProductController@getProductDetails')->name('get.details');
 
     //Vendors
-    Route::get('/admin/vendors', 'Admin\VendorController@getVendors')->name('get.vendors');
-    Route::patch('/admin/vendors/{vendor}', 'Admin\VendorController@patchVendor')->name('patch.vendors');
+    Route::get('/admin/vendors', 'Admin\VendorController@getVendors')
+        ->name('get.vendors');
 
-
-
+    Route::patch('/admin/vendors/{vendor}', 'Admin\VendorController@patchVendor')
+        ->name('patch.vendors');
 });

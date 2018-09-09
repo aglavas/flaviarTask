@@ -11,7 +11,6 @@ use App\Http\Requests\PostProductVendorsRequest;
 use App\Models\Product;
 use App\Services\XlsParser;
 use App\Transformers\ProductDetailsTransformer;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -37,8 +36,7 @@ class ProductController extends Controller
     public function __construct(
         ProductRepositoryInterface $productRepository,
         VendorRepositoryInterface $vendorRepository
-    )
-    {
+    ) {
         $this->productRepository = $productRepository;
         $this->vendorRepository = $vendorRepository;
     }
@@ -68,8 +66,7 @@ class ProductController extends Controller
 
         $result = $this->productRepository->insertBulkProducts($parsedArray);
 
-        if($result)
-        {
+        if ($result) {
             return redirect()->back()->with('success', __('Data imported successfully'));
         }
 
@@ -84,12 +81,11 @@ class ProductController extends Controller
      * @param PatchProductRequest $request
      * @return $this
      */
-    public function patchProduct(Product $product,  PatchProductRequest $request)
+    public function patchProduct(Product $product, PatchProductRequest $request)
     {
         $result = $this->productRepository->updateProduct($request->only(['name', 'volume', 'abv']), $product);
 
-        if($result)
-        {
+        if ($result) {
             return response()->json([
                 'message' => 'Product is updated successfully.'
             ])->setStatusCode(200);
@@ -116,11 +112,13 @@ class ProductController extends Controller
     }
 
     /**
+     * Connect vendor and product with additional data
+     *
      * @param Product $product
      * @param PostProductVendorsRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postProductVendors(Product $product,  PostProductVendorsRequest $request)
+    public function postProductVendors(Product $product, PostProductVendorsRequest $request)
     {
         $product->vendors()->attach($request->post('vendor_id'), [
             'stock' => $request->post('stock'),

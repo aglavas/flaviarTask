@@ -36,5 +36,4 @@ class ProductController
 
         return ProductResource::make($productVendors);
     }
-
 }

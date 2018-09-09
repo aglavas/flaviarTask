@@ -3,18 +3,21 @@
 namespace App\Validators;
 
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\DB;
 
 class CustomValidator
 {
+    /**
+     * Excel extension const
+     */
+    const XLS = 'xls';
 
     /**
      * Validation rule for checking xls extension
      *
-     * @param $message
      * @param $attribute
-     * @param $rule
+     * @param $value
      * @param $parameters
+     * @param $validator
      * @return bool
      */
     public function extensionExcel($attribute, $value, $parameters, $validator)
@@ -22,8 +25,7 @@ class CustomValidator
         /** @var UploadedFile $value */
         $result = $value->getClientOriginalExtension();
 
-        if($result === 'xls')
-        {
+        if ($result === self::XLS) {
             return true;
         }
 

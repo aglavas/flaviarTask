@@ -21,24 +21,21 @@ class ProductDetailsTransformer
      */
     public function transform(Collection $productDetails, Collection $additionalInformation)
     {
-        $productDetails->each(function ($product) use($additionalInformation){
+        $productDetails->each(function ($product) use ($additionalInformation) {
 
-            $additionalInformation->each(function ($productAdditional) use($product){
+            $additionalInformation->each(function ($productAdditional) use ($product) {
 
-                if($product->product_id == $productAdditional->product_id)
-                {
+                if ($product->product_id == $productAdditional->product_id) {
                     $this->priceStatistics = [
                         'min' => $productAdditional->min_price,
                         'max' => $productAdditional->max_price,
                         'avg' => $productAdditional->avg_price,
                     ];
-
                     return false;
                 }
             });
 
-            if($this->priceStatistics != null)
-            {
+            if ($this->priceStatistics != null) {
                 $product->min = $this->priceStatistics['min'];
                 $product->max = $this->priceStatistics['max'];
                 $product->avg = $this->priceStatistics['avg'];

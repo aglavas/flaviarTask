@@ -61,6 +61,7 @@
                 });
                 openEditModal(rowArray);
             });
+
             function openEditModal(rowArray) {
                 $('#modal-name').val(rowArray[1]);
                 $('#modal').modal('show');

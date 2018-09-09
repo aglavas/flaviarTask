@@ -18,4 +18,3 @@ $factory->define(App\Models\Vendor::class, function (Faker $faker) {
         'name' => $faker->name
     ];
 });
-

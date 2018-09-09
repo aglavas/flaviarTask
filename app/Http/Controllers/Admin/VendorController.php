@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Contracts\VendorRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PatchVendorRequest;
-use App\Models\Product;
 use App\Models\Vendor;
 
 class VendorController extends Controller
@@ -45,12 +44,11 @@ class VendorController extends Controller
      * @param PatchVendorRequest $request
      * @return $this
      */
-    public function patchVendor(Vendor $vendor,  PatchVendorRequest $request)
+    public function patchVendor(Vendor $vendor, PatchVendorRequest $request)
     {
         $result = $this->vendorRepository->updateVendor($request->only(['name']), $vendor);
 
-        if($result)
-        {
+        if ($result) {
             return response()->json([
                 'message' => 'Product is updated successfully.'
             ])->setStatusCode(200);

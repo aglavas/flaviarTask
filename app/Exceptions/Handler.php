@@ -50,8 +50,7 @@ class Handler extends ExceptionHandler
     {
         $segment = $request->segments();
 
-        if($segment[0] === 'api' && $exception instanceof ModelNotFoundException)
-        {
+        if ($segment[0] === 'api' && $exception instanceof ModelNotFoundException) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Product not found.',

@@ -41,10 +41,9 @@ class ProductRepository implements ProductRepositoryInterface
      */
     public function insertBulkProducts(array $product)
     {
-        try{
+        try {
             return $this->product->insert($product);
-        }catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return false;
         }
     }
@@ -68,7 +67,7 @@ class ProductRepository implements ProductRepositoryInterface
      */
     public function getAllProductDetails()
     {
-        return $this->product->with(['vendors' => function($query){;
+        return $this->product->with(['vendors' => function ($query) {
             $query->orderBy('price', 'asc');
         }])->get();
     }
@@ -95,7 +94,7 @@ class ProductRepository implements ProductRepositoryInterface
      *
      * @param $relation
      * @param Product $product
-     * @return $this
+     * @return Product
      */
     public function loadRelation($relation, Product $product)
     {

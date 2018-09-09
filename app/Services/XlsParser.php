@@ -35,10 +35,8 @@ class XlsParser
 
         $formattedArray = [];
 
-        foreach ($importedArray as $key => $value)
-        {
-            if($key != 0 && !in_array(null, $value))
-            {
+        foreach ($importedArray as $key => $value) {
+            if ($key != 0 && !in_array(null, $value)) {
                 $formattedArray[] = [
                     'product_id' => $value[0],
                     'name' => $value[1],
@@ -50,5 +48,4 @@ class XlsParser
 
         return $formattedArray;
     }
-
 }
