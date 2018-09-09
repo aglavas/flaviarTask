@@ -3,6 +3,7 @@
 namespace App\Contracts;
 
 use App\Models\Product;
+use Illuminate\Database\Eloquent\Model;
 
 interface ProductRepositoryInterface
 {
@@ -43,4 +44,13 @@ interface ProductRepositoryInterface
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function getProductStatistics();
+
+    /**
+     * Load relationship on model instance
+     *
+     * @param $relation
+     * @param Product $product
+     * @return mixed
+     */
+    public function loadRelation($relation, Product $product);
 }

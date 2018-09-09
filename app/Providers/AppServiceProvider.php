@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Http\Resources\Json\Resource;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
@@ -23,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         Validator::extend('excel', 'App\Validators\CustomValidator@extensionExcel');
         Validator::replacer('excel', 'App\Validators\CustomValidator@extensionExcelReplacer');
+        Resource::withoutWrapping();
     }
 
     /**

@@ -3,7 +3,9 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use function PHPSTORM_META\type;
 
 class Handler extends ExceptionHandler
 {
@@ -46,6 +48,16 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        $segment = $request->segments();
+
+        if($segment[0] === 'api' && $exception instanceof ModelNotFoundException)
+        {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Product not found.',
+            ])->setStatusCode(404);
+        }
+
         return parent::render($request, $exception);
     }
 }

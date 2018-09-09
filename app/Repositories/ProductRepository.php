@@ -89,4 +89,16 @@ class ProductRepository implements ProductRepositoryInterface
             ->orderBy('price', 'desc')
             ->get();
     }
+
+    /**
+     * Load relationship on model instance
+     *
+     * @param $relation
+     * @param Product $product
+     * @return $this
+     */
+    public function loadRelation($relation, Product $product)
+    {
+        return $product->load($relation);
+    }
 }
