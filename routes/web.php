@@ -32,6 +32,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/product/vendors/{product}', 'Admin\ProductController@getProductVendors')->name('get.product.vendors');
     Route::post('/admin/product/vendors/{product}', 'Admin\ProductController@postProductVendors')->name('post.product.vendors');
 
+    //Vendors
+    Route::get('/admin/vendors', 'Admin\VendorController@getVendors')->name('get.vendors');
+
+    Route::patch('/admin/vendors/{vendor}', 'Admin\VendorController@patchVendor')->name('patch.vendors');
+
 
 
 });

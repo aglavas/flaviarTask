@@ -41,6 +41,10 @@
                         <li {{{ (Request::is('admin/products') ? 'class=active' : '') }}}>
                             <a class="nav-link" href="{{ route('get.products') }}">Products</a>
                         </li>
+                        <li {{{ (Request::is('admin/vendors') ? 'class=active' : '') }}}>
+                            <a class="nav-link" href="{{ route('get.vendors') }}">Vendors</a>
+                        </li>
+
                     </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">

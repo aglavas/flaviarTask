@@ -32,4 +32,16 @@ class VendorRepository implements VendorRepositoryInterface
     {
         return $this->vendor->all();
     }
+
+    /**
+     * Update vendor entity
+     *
+     * @param array $params
+     * @param Vendor $model
+     * @return bool
+     */
+    public function updateVendor(array $params, Vendor $model)
+    {
+        return $model->update($params);
+    }
 }
