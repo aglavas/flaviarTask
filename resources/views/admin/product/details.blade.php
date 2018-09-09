@@ -48,7 +48,7 @@
                     </button>
                 </div>
                 <div class="col-md-8 offset-md-4">
-                    <a href="/admin/products" class="btn btn-primary" role="button">Back</a>
+                    <a href="{{route('get.products')}}" class="btn btn-primary" role="button">Back</a>
                 </div>
             </div>
         </form>

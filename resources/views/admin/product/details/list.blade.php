@@ -10,7 +10,6 @@
                 <br>
                 <br>
                 @if (count($product->vendors))
-                    {{--@dump($product)--}}
                     <div class="table-container collapse" id="collapseTable{{$product->id}}">
                         <table class="table">
                             <thead class="thead-dark">

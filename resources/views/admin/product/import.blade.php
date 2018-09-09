@@ -79,7 +79,8 @@
                     <td>{{ $product->abv }}</td>
                     <td>
                         <a href="#" class="editButton btn btn-primary" role="button">Edit</a>
-                        <a href="/admin/product/vendors/{{$product->product_id}}" class="btn btn-primary" role="button">Assign to vendor</a>
+                        <a href="{{ route('get.product.vendors', $product)}}" class="btn btn-primary" role="button">Assign to vendor</a>
+                        {{--<a href="/admin/product/vendors/{{$product->product_id}}" class="btn btn-primary" role="button">Assign to vendor</a>--}}
                     </td>
                 </tr>
             @endforeach

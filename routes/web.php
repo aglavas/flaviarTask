@@ -39,10 +39,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::patch('/admin/products/{product}', 'Admin\ProductController@patchProduct')
         ->name('patch.products');
 
-    Route::get('/admin/product/vendors/{product}', 'Admin\ProductController@getProductVendors')
+    Route::get('/admin/product/{product}/vendors', 'Admin\ProductController@getProductVendors')
         ->name('get.product.vendors');
 
-    Route::post('/admin/product/vendors/{product}', 'Admin\ProductController@postProductVendors')
+    Route::post('/admin/product/{product}/vendors', 'Admin\ProductController@postProductVendors')
         ->name('post.product.vendors');
 
     Route::get('/admin/product/details', 'Admin\ProductController@getProductDetails')->name('get.details');
