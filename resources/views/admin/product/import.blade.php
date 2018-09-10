@@ -98,20 +98,20 @@
                 </div>
                 <meta name="csrf-token" content="{{ csrf_token() }}">
                 <div class="modal-body mx-3">
-                    <div class="md-form mb-5">
+                    <div class="md-form mb-4">
                         <i class="fa fa-envelope prefix grey-text"></i>
-                        <input type="text" id="modal-name" class="form-control validate">
                         <label data-error="wrong" data-success="right" for="modal-name">Name</label>
+                        <input type="text" id="modal-name" class="form-control validate">
                     </div>
                     <div class="md-form mb-4">
                         <i class="fa fa-lock prefix grey-text"></i>
-                        <input type="text" id="modal-volume" class="form-control validate">
                         <label data-error="wrong" data-success="right" for="modal-volume">Volume</label>
+                        <input type="text" id="modal-volume" class="form-control validate">
                     </div>
                     <div class="md-form mb-4">
                         <i class="fa fa-lock prefix grey-text"></i>
-                        <input type="text" id="modal-abv" class="form-control validate">
                         <label data-error="wrong" data-success="right" for="modal-abv">Abv</label>
+                        <input type="text" id="modal-abv" class="form-control validate">
                     </div>
                 </div>
                 <div id="info">

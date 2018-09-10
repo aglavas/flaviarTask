@@ -37,8 +37,8 @@
                 <div class="modal-body mx-3">
                     <div class="md-form mb-5">
                         <i class="fa fa-envelope prefix grey-text"></i>
-                        <input type="text" id="modal-name" class="form-control validate">
                         <label data-error="wrong" data-success="right" for="modal-name">Name</label>
+                        <input type="text" id="modal-name" class="form-control validate">
                     </div>
                 </div>
                 <div id="info">
