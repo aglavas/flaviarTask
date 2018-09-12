@@ -127,13 +127,16 @@
 
         $('document').ready(function() {
             $(".editButton").on("click", function(){
+                var id = $(this).closest('tr').find('th').map(function() {
+                    return $(this).text();
+                });
                 var rowArray = $(this).closest('tr').find('td').map(function() {
                     return $(this).text();
                 });
-                openEditModal(rowArray);
+                openEditModal(rowArray, id);
             });
 
-            function openEditModal(rowArray) {
+            function openEditModal(rowArray, id) {
                 $('#modal-name').val(rowArray[1]);
                 $('#modal-volume').val(rowArray[2]);
                 $('#modal-abv').val(rowArray[3]);
@@ -142,7 +145,7 @@
 
                 $( "#saveEdit" ).bind( "click", function() {
                     $.ajax({
-                        url: '/admin/products/' + rowArray[0] ,
+                        url: '/admin/products/' + id[0] ,
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },

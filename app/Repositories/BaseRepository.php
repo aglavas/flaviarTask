@@ -11,7 +11,7 @@ abstract class BaseRepository
      *
      * @param $relation
      * @param Model $model
-     * @return $this
+     * @return Model
      */
     public function loadRelation($relation, Model $model)
     {

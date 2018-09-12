@@ -24,8 +24,8 @@ class PostProductVendorsRequest extends FormRequest
     public function rules()
     {
         return [
-            'stock' => ['required','integer'],
-            'price' => ['required','numeric'],
+            'stock' => ['required','integer','min:0'],
+            'price' => ['required','numeric','min:0.000001'],
             'vendor_id' => ['required','integer','exists:vendors,id', 'unique_with:product_vendor,product_id']
         ];
     }

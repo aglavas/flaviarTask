@@ -25,9 +25,9 @@ class PatchVendorProductsRequest extends FormRequest
     {
         return [
             'stock' => ['required','array'],
-            'stock.*' => ['required','integer'],
+            'stock.*' => ['required','integer','min:0'],
             'price' => ['required','array'],
-            'price.*' => ['required','numeric'],
+            'price.*' => ['required','numeric','min:0.000001'],
             'productIds' => ['required','array'],
             'productIds.*' => ['required','integer','exists:products,id'],
         ];

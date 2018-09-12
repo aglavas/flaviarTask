@@ -12,7 +12,7 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        'abv', 'product_id', 'volume', 'title',
+        'abv', 'product_id', 'volume', 'name',
     ];
 
     /**

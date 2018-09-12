@@ -25,8 +25,8 @@ class PatchProductRequest extends FormRequest
     {
         return [
             'name' => ['required'],
-            'volume' => ['integer'],
-            'abv' => ['numeric']
+            'volume' => ['integer', 'min:1'],
+            'abv' => ['numeric','min:1']
         ];
     }
 }

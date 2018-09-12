@@ -11,6 +11,7 @@ use App\Http\Requests\PostProductVendorsRequest;
 use App\Models\Product;
 use App\Services\XlsParser;
 use App\Transformers\ProductDetailsTransformer;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use PhpOffice\PhpSpreadsheet\Reader\Exception as ReaderException;
 
 class ProductController extends Controller
@@ -88,7 +89,15 @@ class ProductController extends Controller
      */
     public function patchProduct(Product $product, PatchProductRequest $request)
     {
-        $result = $this->productRepository->updateProduct($request->only(['name', 'volume', 'abv']), $product);
+        try {
+            $productInstance = $product->findOrFail($request->route('productId'));
+        } catch (ModelNotFoundException $exception) {
+            return response()->json([
+                'message' => 'Product not found.'
+            ])->setStatusCode(404);
+        }
+
+        $result = $this->productRepository->updateProduct($request->only(['name', 'volume', 'abv']), $productInstance);
 
         if ($result) {
             return response()->json([
