@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Contracts\VendorRepositoryInterface;
 use App\Models\Vendor;
 
-class VendorRepository implements VendorRepositoryInterface
+class VendorRepository extends BaseRepository implements VendorRepositoryInterface
 {
     /**
      * Repository entity
@@ -43,5 +43,42 @@ class VendorRepository implements VendorRepositoryInterface
     public function updateVendor(array $params, Vendor $model)
     {
         return $model->update($params);
+    }
+
+    /**
+     * Update related products and product details
+     *
+     * @param array $params
+     * @param Vendor $vendor
+     * @param bool $format
+     * @return array
+     */
+    public function updateVendorProducts(array $params, Vendor $vendor, $format = true)
+    {
+        if ($format) {
+            $params = $this->formatParams($params);
+        }
+
+        return $vendor->products()->sync($params);
+    }
+
+    /**
+     * Format parameters to sync method structure
+     *
+     * @param $params
+     * @return array
+     */
+    protected function formatParams($params)
+    {
+        $formattedParams = [];
+
+        foreach ($params['productIds'] as $key => $id) {
+            $formattedParams[$id] = [
+                'stock' => $params['stock'][$id],
+                'price' => $params['price'][$id]
+            ];
+        }
+
+        return $formattedParams;
     }
 }

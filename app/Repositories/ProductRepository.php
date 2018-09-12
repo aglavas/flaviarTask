@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Contracts\ProductRepositoryInterface;
 use App\Models\Product;
 
-class ProductRepository implements ProductRepositoryInterface
+class ProductRepository extends BaseRepository implements ProductRepositoryInterface
 {
     /**
      * Repository entity
@@ -90,14 +90,13 @@ class ProductRepository implements ProductRepositoryInterface
     }
 
     /**
-     * Load relationship on model instance
+     * Get all products
      *
-     * @param $relation
-     * @param Product $product
-     * @return Product
+     * @param array $columns
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function loadRelation($relation, Product $product)
+    public function getAllProducts(array $columns = ['*'])
     {
-        return $product->load($relation);
+        return $this->product->all($columns);
     }
 }

@@ -53,4 +53,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::patch('/admin/vendors/{vendor}', 'Admin\VendorController@patchVendor')
         ->name('patch.vendors');
+
+    Route::get('/admin/vendors/{vendorId}/products', 'Admin\VendorController@getVendorProducts')
+        ->name('get.vendor.products');
+
+    Route::patch('/admin/vendors/{vendorId}/products', 'Admin\VendorController@patchVendorProducts')
+        ->name('get.vendor.products');
 });

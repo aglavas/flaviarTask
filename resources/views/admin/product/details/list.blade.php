@@ -24,7 +24,7 @@
                                 <tr>
                                     <td>{{ $vendorDetails->name }}</td>
                                     <td>{{ $vendorDetails->pivot->stock }}</td>
-                                    <td>{{ $vendorDetails->pivot->price }}</td>
+                                    <td>{{ $vendorDetails->price }}</td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -33,10 +33,10 @@
                             <b>Min price is</b> {{$product->min}}
                         @endif
                         @if(isset($product->max))
-                            <b>Min price is</b> {{$product->max}}
+                            <b>Max price is</b> {{$product->max}}
                         @endif
                         @if(isset($product->avg))
-                            <b>Min price is</b> {{$product->avg}}
+                            <b>Average price is</b> {{$product->avg}}
                         @endif
 
                     </div>

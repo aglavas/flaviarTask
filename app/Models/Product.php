@@ -49,4 +49,16 @@ class Product extends Model
         return $this->belongsToMany(Vendor::class, 'product_vendor', 'product_id', 'vendor_id')
             ->withPivot(['stock','price']);
     }
+
+    /**
+     * Price accessor
+     *
+     * @param $value
+     * @return string
+     */
+    public function getPriceAttribute($value)
+    {
+        $price = number_format((float)$this->pivot->price, 2, '.', '');
+        return $price;
+    }
 }

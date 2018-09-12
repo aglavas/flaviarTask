@@ -4,10 +4,10 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class VendorPriceResource extends JsonResource
+class ProductsInfoResource extends JsonResource
 {
     /**
-     * Transform VendorPrice resource into an array.
+     * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return array
@@ -15,8 +15,10 @@ class VendorPriceResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'vendor' => $this->name,
-            'price' => $this->price
+            'id' => $this->id,
+            'product' => $this->name,
+            'price' => $this->price,
+            'stock' => $this->pivot->stock
         ];
     }
 }

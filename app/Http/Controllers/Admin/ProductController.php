@@ -11,6 +11,7 @@ use App\Http\Requests\PostProductVendorsRequest;
 use App\Models\Product;
 use App\Services\XlsParser;
 use App\Transformers\ProductDetailsTransformer;
+use PhpOffice\PhpSpreadsheet\Reader\Exception as ReaderException;
 
 class ProductController extends Controller
 {
@@ -62,7 +63,11 @@ class ProductController extends Controller
      */
     public function postProducts(XlsParser $parser, PostProductRequest $request)
     {
-        $parsedArray = $parser->parse($request->file('file'));
+        try {
+            $parsedArray = $parser->parse($request->file('file'));
+        } catch (ReaderException $exception) {
+            return redirect()->back()->with('error', __('Error while importing data, possible corrupted data.'));
+        }
 
         $result = $this->productRepository->insertBulkProducts($parsedArray);
 

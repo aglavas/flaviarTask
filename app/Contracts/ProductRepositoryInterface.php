@@ -3,9 +3,8 @@
 namespace App\Contracts;
 
 use App\Models\Product;
-use Illuminate\Database\Eloquent\Model;
 
-interface ProductRepositoryInterface
+interface ProductRepositoryInterface extends BaseRepositoryInterface
 {
     /**
      * Gets all imported products
@@ -46,11 +45,10 @@ interface ProductRepositoryInterface
     public function getProductStatistics();
 
     /**
-     * Load relationship on model instance
+     * Get all products
      *
-     * @param $relation
-     * @param Product $product
+     * @param array $columns
      * @return mixed
      */
-    public function loadRelation($relation, Product $product);
+    public function getAllProducts(array $columns = ['*']);
 }
