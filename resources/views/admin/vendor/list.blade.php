@@ -90,6 +90,5 @@
             products[{{$product->id}}] = '{{$product->name}}';
         @endforeach
     </script>
-    <script type="text/javascript" src="/js/vendor/list.js"></script>
 @endif
 @endsection

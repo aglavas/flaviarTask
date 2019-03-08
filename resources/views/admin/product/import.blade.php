@@ -123,6 +123,5 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="/js/product/import.js"></script>
 @endif
 @endsection
